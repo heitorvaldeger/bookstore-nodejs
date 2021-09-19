@@ -1,8 +1,8 @@
-import { Application, IRoute, Request, Response } from "express";
+import { Request, Response } from "express";
+import { AbstractController } from "./contracts/AbstractController";
 
-export class LivroController {
-  private app?: Application;
-  private prefixo: string = '/livros';
+export class LivroController extends AbstractController {
+  protected prefixo: string = '/livros';
 
   private list (req: Request, res: Response) {
     res.send('GET Listar Livros');
@@ -10,16 +10,6 @@ export class LivroController {
   
   private create (req: Request, res: Response) {
     res.send('POST Rota Livros');
-  }
-
-  forApp (app: Application) {
-    this.app = app;
-
-    return this;
-  }
-
-  forRoute (path: string) : IRoute {
-    return this.app?.route(`${this.prefixo}${path}`) as IRoute
   }
 
   registerRouters () {

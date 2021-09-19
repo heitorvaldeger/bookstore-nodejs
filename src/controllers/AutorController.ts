@@ -1,8 +1,8 @@
-import { Application, IRoute, Request, Response } from "express";
+import { Request, Response } from "express";
+import { AbstractController } from "./contracts/AbstractController";
 
-export class AutorController {
-  private app?: Application;
-  private prefixo: string = "/autores";
+export class AutorController extends AbstractController {
+  protected prefixo: string = "/autores";
 
   private list (req: Request, res: Response) {
     res.send('GET Listar Autores');
@@ -10,16 +10,6 @@ export class AutorController {
   
   private create (req: Request, res: Response) {
     res.send('POST Rota Autor');
-  }
-
-  forApp (app: Application) {
-    this.app = app;
-
-    return this;
-  }
-
-  forRoute (path: string) : IRoute {
-    return this.app?.route(`${this.prefixo}${path}`) as IRoute
   }
 
   registerRouters () {
